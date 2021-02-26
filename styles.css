@@ -1,0 +1,15 @@
+
+.top {
+
+}
+h1 {
+  display: inline;
+  margin: 0px auto;
+}
+.add{
+  display: inline-block;
+}
+
+.book div {
+  display:inline;
+}
