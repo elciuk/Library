@@ -1,13 +1,35 @@
 <html>
 <head>
-  <script src="script.js" charset="utf-8"></script>
-  <link rel="stylesheet" href="styles.css">
+
 </head>
 
 <body>
+  <div class="overlay">
+    <form class="addForm">
+      <label for="title">Title:</label>
+      <input type="text" name="title" id="text" required>
+      <br>
+
+      <label for="author">Author:</label>
+      <input type="text" name="author" id="author" required>
+      <br>
+
+      <label for="pages">Pages: </label>
+      <input type="number" name="pages" id="pages" required>
+      <br>
+
+      <label for="read">Read?</label>
+      <input type="checkbox" name="read" id="read">
+      <br>
+
+      <input type="submit" value="Confirm" id="confirm">
+      <input type="button" value="Cancel" id="cancel">
+      
+    </form>
+  </div>
   <div class="top">
     <h1>My Library</h1>
-    <button type="button" class="add">Add Book</button>
+    <button type="button" class="add" onclick="showOverlay()">Add Book</button>
   </div>
 
   <div class="list">
@@ -39,4 +61,6 @@
   </div>
 
 </body>
+<script src="script.js" charset="utf-8"></script>
+<link rel="stylesheet" href="styles.css">
 </html>

@@ -8,6 +8,9 @@ h1 {
 }
 .add{
   display: inline-block;
+  background-color:rgba(61, 206, 101, 1);
+  border:none;
+  border-radius:7px;
 }
 
 .list {
@@ -36,4 +39,33 @@ h1 {
 }
 .index, .title, .author, .pages, .read{
   margin-right:1em;
+}
+.overlay {
+  border-style:solid;
+  position: absolute;
+  margin:auto;
+  top:30%;
+  left:40%;
+  padding: 2em;
+  display:none;
+}
+#confirm{
+  position:relative;
+  margin: 1em 40% 0 40%;
+  padding:0.5em;
+  background-color: rgba(61, 206, 101, 1);
+  border:none;
+  border-radius:7px;
+}
+#cancel {
+  position:relative;
+  margin: 0.5em 40% 0 40%;
+  padding:0.2em;
+  background-color: rgba(206, 10, 0, 1);
+  border:none;
+  border-radius:7px;
+}
+input{
+  position:relative;
+  margin: 0 auto;
 }
