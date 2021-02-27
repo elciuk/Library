@@ -10,6 +10,30 @@ h1 {
   display: inline-block;
 }
 
-.book div {
-  display:inline;
+.list {
+  display:flex;
+  flex-direction:column;
+}
+
+.book {
+  display:flex;
+  flex-direction: row:
+  flex-wrap: nowrap;
+  justify-content:flex-start;
+}
+.index {
+}
+.title{
+}
+.author{
+}
+.pages{
+}
+.read{
+}
+.delete{
+ margin-right: 1em;
+}
+.index, .title, .author, .pages, .read{
+  margin-right:1em;
 }
