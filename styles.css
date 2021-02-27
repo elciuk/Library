@@ -32,7 +32,7 @@ h1 {
 .read{
 }
 .delete{
- margin-right: 1em;
+ margin-right: 0.5em;
 }
 .index, .title, .author, .pages, .read{
   margin-right:1em;
