@@ -1,13 +1,13 @@
 const addButton = document.querySelector(".add");
 const overlay = document.querySelector(".overlay");
-const formTitle = document.querySelector("#title");
-const formAuthor = document.querySelector("#author");
-const formPages = document.querySelector("#pages");
-const formRead = document.querySelector("#read");
-const formCancel = document.querySelector(".cancel");
+const fTitle = document.querySelector("#title");
+const fAuthor = document.querySelector("#author");
+const fPages = document.querySelector("#pages");
+const fRead = document.querySelector("#read");
+const fConfirm = document.querySelector("#confirm")
+const fCancel = document.querySelector(".cancel");
 
 let myLibrary = [];
-
 function Book(title, author, pages, read) {
   // the constructor...
   this.title = title;
@@ -18,12 +18,24 @@ function Book(title, author, pages, read) {
 
 function addBookToLibrary() {
   // do stuff here
-  myLibrary.push(new Book(formTitle.content, formAuthor.content, formPages.content, formRead.value));
+  myLibrary.push(new Book(fTitle.value, fAuthor.value, fPages.value, fRead.checked));
+  console.log(myLibrary);
 }
-function showOverlay(){
 
+function showOverlay(){
   overlay.style.display = "block";
 }
+
 cancel.onclick = function(){
   overlay.style.display = "none"
+}
+
+function validateForm(){
+  //form validation, if all valid, proceed into submitForm()
+  console.log(`Author: ${fAuthor.value}, title: ${fTitle.value}, pages: ${fPages.value}, read: ${fRead.checked}`);
+
+  if(fAuthor.value !="" && fTitle.value != "" && fPages.value != ""){
+    console.log("all data valid");
+    addBookToLibrary();
+}
 }
