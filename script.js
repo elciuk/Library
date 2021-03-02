@@ -16,11 +16,7 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-function addBookToLibrary() {
-  // do stuff here
-  myLibrary.push(new Book(fTitle.value, fAuthor.value, fPages.value, fRead.checked));
-  console.log(myLibrary);
-}
+
 
 function showOverlay(){
   overlay.style.display = "block";
@@ -32,10 +28,18 @@ cancel.onclick = function(){
 
 function validateForm(){
   //form validation, if all valid, proceed into submitForm()
-  console.log(`Author: ${fAuthor.value}, title: ${fTitle.value}, pages: ${fPages.value}, read: ${fRead.checked}`);
-
   if(fAuthor.value !="" && fTitle.value != "" && fPages.value != ""){
-    console.log("all data valid");
     addBookToLibrary();
 }
+}
+
+function addBookToLibrary() {
+  // called by validateForm() if all fields are valid
+  // pushes new Book into myLibrary[]
+  myLibrary.push(new Book(fTitle.value, fAuthor.value, fPages.value, fRead.checked));
+  fTitle.value = "";
+  fAuthor.value = "";
+  fPages.value = "";
+  fRead.checked = false;
+  console.log(myLibrary);
 }
