@@ -9,7 +9,29 @@ const fCancel = document.querySelector(".cancel");
 const list = document.querySelector(".list");
 
 
-let myLibrary = [{title:"Lord of the Rings",author:"J.R.R. Tolkien",pages:123, read:"read"}, {title:"Game of Thrones", author:"G.R.R. Martin",pages:456, read: "read"}];
+let myLibrary = [{title:"Lord of the Rings",author:"J.R.R. Tolkien",pages:123, read:"read"}, {title:"Game of Thrones", author:"G.R.R. Martin",pages:456, read: "read"},
+  {title:"Pyramids",author:"Pratchett", pages:789, read:"read"}];
+
+
+
+function refreshList(){
+  while(list.hasChildNodes()){
+    list.removeChild(list.firstChild);
+  }
+  for(let a=0;a<myLibrary.length;a++){
+    list.insertAdjacentHTML("beforeend",
+        `<div class="book" id="book${a+1}">
+        <div class="delete" onclick="deleteEntry(${a+1})">&#10060;</div>
+        <div class="index">#${a+1}</div>
+        <div class="title">${myLibrary[a].title}</div>
+        <div class="author">${myLibrary[a].author}</div>
+        <div class="pages">${myLibrary[a].pages}</div>
+        <div class="read">${myLibrary[a].read}</div>
+    </div>`);
+  }
+}
+
+refreshList();
 function Book(title, author, pages, read) {
   // the constructor...
   this.title = title;
@@ -17,18 +39,6 @@ function Book(title, author, pages, read) {
   this.pages = pages;
   this.read = read;
 }
-for(let a=0;a<myLibrary.length;a++){
-  list.insertAdjacentHTML("beforeend",
-      `<div class="book">
-      <div class="delete" onclick="deleteEntry()">&#10060;</div>
-      <div class="index">#${a+1}</div>
-      <div class="title">${myLibrary[a].title}</div>
-      <div class="author">${myLibrary[a].author}</div>
-      <div class="pages">${myLibrary[a].pages}</div>
-      <div class="read">${myLibrary[a].read}</div>
-  </div>`);
-}
-
 function showOverlay(){
   overlay.style.display = "block";
 }
@@ -57,8 +67,8 @@ function addBookToLibrary() {
   myLibrary.push(new Book(fTitle.value, fAuthor.value, fPages.value, checkRead));
 
   list.insertAdjacentHTML("beforeend",
-      `<div class="book">
-      <div class="delete" onclick="deleteEntry()">&#10060;</div>
+      `<div class="book" id="book${myLibrary.length}">
+      <div class="delete" onclick="deleteEntry(${myLibrary.length})">&#10060;</div>
       <div class="index">#${myLibrary.length}</div>
       <div class="title">${myLibrary[myLibrary.length-1].title}</div>
       <div class="author">${myLibrary[myLibrary.length-1].author}</div>
@@ -69,12 +79,15 @@ function addBookToLibrary() {
   clearForm();
 }
 
+
 function clearForm(){
   fTitle.value = "";
   fAuthor.value = "";
   fPages.value = "";
   fRead.checked = false;
 }
-function deleteEntry(){
-  console.log(myLibrary);
+function deleteEntry(id){
+  document.querySelector(`#book${id}`).remove();
+  myLibrary.splice(id-1,1);
+  refreshList();
 }
