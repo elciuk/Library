@@ -7,7 +7,7 @@ const fRead = document.querySelector("#read");
 const fConfirm = document.querySelector("#confirm")
 const fCancel = document.querySelector(".cancel");
 const list = document.querySelector(".list");
-
+const read = document.querySelectorAll(".read");
 
 let myLibrary = [{title:"Lord of the Rings",author:"J.R.R. Tolkien",pages:123, read:"read"}, {title:"Game of Thrones", author:"G.R.R. Martin",pages:456, read: "read"},
   {title:"Pyramids",author:"Pratchett", pages:789, read:"read"}];
@@ -26,7 +26,7 @@ function refreshList(){
         <div class="title">${myLibrary[a].title}</div>
         <div class="author">${myLibrary[a].author}</div>
         <div class="pages">${myLibrary[a].pages}</div>
-        <div class="read">${myLibrary[a].read}</div>
+        <div class="read" onclick="toggleRead(${a})">${myLibrary[a].read}</div>
     </div>`);
   }
 }
@@ -64,7 +64,12 @@ function addBookToLibrary() {
   } else {
     checkRead = "unread";
   }
-  myLibrary.push(new Book(fTitle.value, fAuthor.value, fPages.value, checkRead));
+  //sanitises fAuthor and fTitle to help prevent XSS
+  let sanitisedTitle = document.createElement("div");
+  sanitisedTitle.textContent = fTitle.value;
+  let sanitisedAuthor = document.createElement("div");
+  sanitisedAuthor.textContent = fAuthor.value;
+  myLibrary.push(new Book(sanitisedTitle.innerHTML, sanitisedAuthor.innerHTML, fPages.value, checkRead));
 
   list.insertAdjacentHTML("beforeend",
       `<div class="book" id="book${myLibrary.length}">
@@ -91,3 +96,13 @@ function deleteEntry(id){
   myLibrary.splice(id-1,1);
   refreshList();
 }
+function toggleRead(index){
+  let toggledBook = document.querySelector(`#book${index+1} > .read`);
+  if(toggledBook.textContent == "read"){
+    toggledBook.textContent = "unread";
+    myLibrary[index].read = "unread";
+  } else {
+    toggledBook.textContent = "read";
+    myLibrary[index].read = "read";
+    }
+  }
