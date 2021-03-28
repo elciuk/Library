@@ -9,8 +9,9 @@ const fCancel = document.querySelector(".cancel");
 const list = document.querySelector(".list");
 const read = document.querySelectorAll(".read");
 
-let myLibrary = [{title:"Lord of the Rings",author:"J.R.R. Tolkien",pages:123, read:"read"}, {title:"Game of Thrones", author:"G.R.R. Martin",pages:456, read: "read"},
-  {title:"Pyramids",author:"Pratchett", pages:789, read:"read"}];
+let myLibrary = [{title:"Sample Book A",author:"Author A",pages:123, read:"read"}, {title:"Sample Book B", author:"Book B",pages:456, read: "read"},
+  {title:"Sample Book C",author:"Author C", pages:789, read:"read"}];
+
 
 
 
@@ -29,6 +30,14 @@ function refreshList(){
         <div class="read" onclick="toggleRead(${a})">${myLibrary[a].read}</div>
     </div>`);
   }
+}
+
+function saveToLocal(){
+  localStorage.setItem('library', JSON.stringify(myLibrary));
+}
+function getFromLocal(){
+  myLibrary = JSON.parse(localStorage.getItem("library"));
+  refreshList();
 }
 
 refreshList();
@@ -69,8 +78,9 @@ function addBookToLibrary() {
   sanitisedTitle.textContent = fTitle.value;
   let sanitisedAuthor = document.createElement("div");
   sanitisedAuthor.textContent = fAuthor.value;
+  //push the book into the array after sanitisation
   myLibrary.push(new Book(sanitisedTitle.innerHTML, sanitisedAuthor.innerHTML, fPages.value, checkRead));
-
+  //insert the html into webpage
   list.insertAdjacentHTML("beforeend",
       `<div class="book" id="book${myLibrary.length}">
       <div class="delete" onclick="deleteEntry(${myLibrary.length})">&#10060;</div>
@@ -82,19 +92,23 @@ function addBookToLibrary() {
   </div>`);
   console.log(myLibrary);
   clearForm();
+  refreshList();
+  saveToLocal();
 }
 
-
+// resets form values
 function clearForm(){
   fTitle.value = "";
   fAuthor.value = "";
   fPages.value = "";
   fRead.checked = false;
 }
+//
 function deleteEntry(id){
   document.querySelector(`#book${id}`).remove();
   myLibrary.splice(id-1,1);
   refreshList();
+  saveToLocal();
 }
 function toggleRead(index){
   let toggledBook = document.querySelector(`#book${index+1} > .read`);
@@ -105,4 +119,5 @@ function toggleRead(index){
     toggledBook.textContent = "read";
     myLibrary[index].read = "read";
     }
+    saveToLocal();
   }

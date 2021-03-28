@@ -69,3 +69,8 @@ input{
   position:relative;
   margin: 0 auto;
 }
+.delete{
+  font-size: 70%;
+  position: relative;
+  top: 2px;
+}
