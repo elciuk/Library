@@ -36,8 +36,11 @@ function saveToLocal(){
   localStorage.setItem('library', JSON.stringify(myLibrary));
 }
 function getFromLocal(){
-  myLibrary = JSON.parse(localStorage.getItem("library"));
-  refreshList();
+  if(localStorage.getItem("library") != undefined){
+    myLibrary = JSON.parse(localStorage.getItem("library"));
+    refreshList();
+  }
+
 }
 
 refreshList();
