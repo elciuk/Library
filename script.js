@@ -12,12 +12,6 @@ const read = document.querySelectorAll(".read");
 let myLibrary = [{title:"Sample Book A",author:"Author A",pages:123, read:"read"}, {title:"Sample Book B", author:"Book B",pages:456, read: "read"},
   {title:"Sample Book C",author:"Author C", pages:789, read:"read"}];
 
-  // START OF BACK4APP TEST
-
-
-
-  // END OF BACK4APP TEST
-
 
 function refreshList(){
   while(list.hasChildNodes()){
