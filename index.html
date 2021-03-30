@@ -3,7 +3,6 @@
   <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
   <script>
   Parse.initialize("R9HD8DFmkvOalNKPQY2I09oDF9aCvQaCVG2UOpzR", "ZZMK0FS86WRtnsNAxp01YhMHFxyDg5i4D2ve7F6v"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
-  Parse.serverURL = "https://parseapi.back4app.com/";
   var user = new Parse.User();
   user.save({
     username: document.getElementById("username").value,
@@ -14,6 +13,8 @@
   }).catch(function(error) {
     alert('Error: ' + error.message);
   });
+  Parse.serverURL = "https://parseapi.back4app.com/";
+
   </script>
 </head>
 
